@@ -46,7 +46,7 @@ exports.findOne = async (req, res, next) => {
     } catch (err) {
         return next(new ApiError(500, "Error retrieving contact"));
     }
-
+    console.log(document)
     res.send(document)
 }
 
@@ -103,7 +103,8 @@ exports.findAllFavorites = async (req, res, next) => {
 
     try {
         const contactService = new ContactService(MongoDB.client);
-        const favorites = contactService.findAllFavorite();
+        const favorites = await contactService.findAllFavorite();
+        console.log(favorites  )
         res.send(favorites)
     } catch (err) {
         return next(new ApiError(500, "Error occured when find all favorite contacts"));
